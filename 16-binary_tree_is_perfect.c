@@ -41,12 +41,15 @@ int binary_tree_is_perfect(const binary_tree_t *tree)
 
 	if (tree == NULL)
 		return (0);
-	
+
 	height = binary_tree_height(tree);
 	max_nodes = (1 << height) - 1;
 	count_nodes(tree, &node_count);
-	
-	return (node_count == max_nodes);
+
+	if (node_count == max_nodes)
+		return (1);
+	else
+		return (0);
 }
 
 /**
@@ -55,7 +58,7 @@ int binary_tree_is_perfect(const binary_tree_t *tree)
  * @count: Traverses each node taking count
  */
 
-int *count_nodes(const binary_tree_t *tree, int *count)
+void count_nodes(const binary_tree_t *tree, int *count)
 {
 	if (tree != NULL)
 	{
@@ -63,6 +66,4 @@ int *count_nodes(const binary_tree_t *tree, int *count)
 		count_nodes(tree->left, count);
 		count_nodes(tree->right, count);
 	}
-	return (count);
-
 }
